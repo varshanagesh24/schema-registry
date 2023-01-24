@@ -43,6 +43,10 @@ User
     INSERT INTO `User` (`userid`, `passwordHash`, `active`, `name`, `createdOn`, `createdBy`, `modifiedOn`, `modifiedBy`) VALUES ('varsha', MD5('password'), 'Y', 'Varsha Nagesh', '2023-01-23 00:00:00', 'varsha', '2023-01-23 00:00:00', 'varsha');
 
 
+
+	INSERT INTO `Schemas`(`sc_id`, `name`, `version`, `schema`, `active`, `createdOn`, `createdBy`, `modifiedOn`, `modifiedBy`) VALUES ('01','varsha','A1','ABC','10','2023-01-23 00:00:00', 'varsha', '2023-01-23 00:00:00', 'varsha');
+
+
 Schemas
 	id: varbinary
 	name: varchar(400)
