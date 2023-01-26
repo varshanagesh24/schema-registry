@@ -1,6 +1,6 @@
 let IconEdit = ({ className }) => {
 	return (
-		<svg enable-background="new 0 0 32 32" version="1.1" viewBox="0 0 32 32" className={className}>
+		<svg enableBackground="new 0 0 32 32" version="1.1" viewBox="0 0 32 32" className={className}>
 			<g>
 				<polyline
 					fill="none"

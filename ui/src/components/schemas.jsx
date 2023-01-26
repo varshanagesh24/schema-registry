@@ -18,7 +18,7 @@ let _rows = [
 	{ id: 10, name: 'GetSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' }
 ];
 
-let Schemas = function() {
+let Schemas = function({ user, update }) {
 	let [ rows, setRows ] = useState([]);
 	useEffect(() => {
 		//TODO: Load Schemas over here
@@ -26,7 +26,7 @@ let Schemas = function() {
 	}, []);
 	return (
 		<div>
-			<Header displayUserMenu={true} />
+			<Header displayUserMenu={true} user={user} />
 			<div className="mx-4 my-8">
 				<div className="text-2xl pb-8">Schemas</div>
 				{rows.length === 0 && (

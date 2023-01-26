@@ -9,7 +9,12 @@ router.get('/user', (req, res) => {
 router.post('/login', (req, res) => {
 	userRep
 		.getAll({ userid: req.body.userid, passwordHash: req.body.password, active: 'Y' })
-		.then((data) => res.send(data));
+		.then(
+			(data) =>
+				data.length === 1
+					? res.send({ name: data[0].name, active: data[0].active, userid: data[0].userid })
+					: {}
+		);
 });
 
 router.post('/user/:id', (req, res) => {

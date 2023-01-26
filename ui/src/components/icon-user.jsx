@@ -1,8 +1,9 @@
-let IconUser = ({ className }) => {
+let IconUser = ({ className, tooltip }) => {
 	return (
 		<svg
 			className={className}
 			fill="none"
+			tooltip={tooltip}
 			stroke="currentColor"
 			strokeLinecap="round"
 			strokeLinejoin="round"
