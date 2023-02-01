@@ -1,0 +1,50 @@
+{
+	"$ref": "#/definitions/UpdateSchemas",
+	"definitions": {
+		"UpdateSchemas": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"sc_id": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"version": {
+					"type": "string"
+				},
+				"schema": {
+					"type": "string"
+				},
+				"active": {
+					"type": "string"
+				},
+				"createdOn": {
+					"type": "string"
+				},
+				"createdBy": {
+					"type": "string"
+				},
+				"modifiedOn": {
+					"type": "string"
+				},
+				"modifiedBy": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"active",
+				"createdBy",
+				"createdOn",
+				"modifiedBy",
+				"modifiedOn",
+				"name",
+				"sc_id",
+				"schema",
+				"version"
+			],
+			"title": "UpdateSchemas"
+		}
+	}
+}

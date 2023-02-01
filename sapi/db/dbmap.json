@@ -1,0 +1,42 @@
+{
+	"Resource": {
+		"keys": [ "id" ],
+		"fields": [
+			{ "name": "id", "type": "varbinary" },
+			{ "name": "page", "type": "varchar" },
+			{ "name": "key", "type": "varchar" },
+			{ "name": "value", "type": "varchar" },
+			{ "name": "createdOn", "type": "datetime" },
+			{ "name": "createdBy", "type": "varchar" },
+			{ "name": "modifiedOn", "type": "varchar" },
+			{ "name": "modifiedBy", "type": "datetime" }
+		]
+	},
+	"Schemas": {
+		"keys": [ "sc_id" ],
+		"fields": [
+			{ "name": "sc_id", "type": "varbinary" },
+			{ "name": "name", "type": "varchar" },
+			{ "name": "version", "type": "varchar" },
+			{ "name": "schema", "type": "varchar" },
+			{ "name": "active", "type": "varchar" },
+			{ "name": "createdOn", "type": "datetime" },
+			{ "name": "createdBy", "type": "varchar" },
+			{ "name": "modifiedOn", "type": "datetime" },
+			{ "name": "modifiedBy", "type": "varchar" }
+		]
+	},
+	"User": {
+		"keys": [ "userid" ],
+		"fields": [
+			{ "name": "userid", "type": "varchar" },
+			{ "name": "passwordHash", "type": "varchar", "hash": true },
+			{ "name": "active", "type": "varchar" },
+			{ "name": "name", "type": "varchar" },
+			{ "name": "createdOn", "type": "datetime" },
+			{ "name": "createdBy", "type": "varchar" },
+			{ "name": "modifiedOn", "type": "datetime" },
+			{ "name": "modifiedBy", "type": "varchar" }
+		]
+	}
+}

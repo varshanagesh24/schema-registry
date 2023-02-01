@@ -1,10 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import React, { useState } from 'react';
-import Login from './components/login';
-import Schemas from './components/schemas';
-import NewSchemas from './components/new-schemas';
-import ViewSchemas from './components/view-schemas';
-import EditSchemas from './components/edit-schemas';
+
+import { loader as loadSchemas } from './components/schemas';
+
+import { loader as loadSchema } from './components/view-schemas';
+import ErrorBoundary from './error-boundary';
+import { Suspense } from 'react';
+import { Loader } from './components/loader';
+
+const Login = React.lazy(() => import('./components/login'));
+const NewSchemas = React.lazy(() => import('./components/new-schemas'));
+const Schemas = React.lazy(() => import('./components/schemas'));
+const EditSchemas = React.lazy(() => import('./components/edit-schemas'));
+const ViewSchemas = React.lazy(() => import('./components/view-schemas'));
 
 function App() {
 	let [ data, setData ] = useState({});
@@ -16,19 +24,22 @@ function App() {
 		},
 		{
 			path: '/schemas',
-			element: <Schemas user={data.login} update={(d) => setData({ ...data, schemas: d })} />
+			element: <Schemas user={data.login} update={(d) => setData({ ...data, schemas: d })} />,
+			loader: loadSchemas
 		},
 		{
 			path: '/schemas/new',
-			element: <NewSchemas user={data.login} schemas={data.schemas} />
+			element: <NewSchemas user={data.login} />
 		},
 		{
 			path: '/schemas/:id',
-			element: <ViewSchemas user={data.login} schemas={data.schemas} />
+			element: <ViewSchemas user={data.login} schemas={data.schemas} />,
+			loader: loadSchema
 		},
 		{
 			path: '/schemas/:id/edit',
-			element: <EditSchemas user={data.login} schemas={data.schemas} />
+			element: <EditSchemas user={data.login} schemas={data.schemas} />,
+			loader: loadSchema
 		}
 	]);
 
@@ -41,7 +52,11 @@ function App() {
 
 	return (
 		<React.StrictMode>
-			<RouterProvider router={router} />
+			<ErrorBoundary>
+				<Suspense fallback=<Loader />>
+					<RouterProvider router={router} />
+				</Suspense>
+			</ErrorBoundary>
 		</React.StrictMode>
 	);
 }

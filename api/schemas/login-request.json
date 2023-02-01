@@ -1,0 +1,19 @@
+{
+	"$ref": "#/definitions/LoginRequest",
+	"definitions": {
+		"LoginRequest": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"userid": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				}
+			},
+			"required": [ "password", "userid" ],
+			"title": "LoginRequest"
+		}
+	}
+}

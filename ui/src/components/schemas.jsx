@@ -1,29 +1,32 @@
-import { useEffect, useState, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Fragment } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import Header from './Header';
 import IconAdd from './icon-add';
 import IconEdit from './icon-edit';
 import IconView from './icon-view';
 
-let _rows = [
-	{ id: 1, name: 'LoginRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-	{ id: 2, name: 'LoginResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-	{ id: 3, name: 'GetSchemasRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-	{ id: 4, name: 'GetSchemasResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-	{ id: 5, name: 'UpdateSchemaRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-	{ id: 6, name: 'UpdateSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-	{ id: 7, name: 'CreateSchemaRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-	{ id: 8, name: 'CreateSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-	{ id: 9, name: 'GetSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-	{ id: 10, name: 'GetSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' }
-];
+import { getSchemas } from '../api';
+
+// let _rows = [
+// 	{ id: 1, name: 'LoginRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
+// 	{ id: 2, name: 'LoginResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
+// 	{ id: 3, name: 'GetSchemasRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
+// 	{ id: 4, name: 'GetSchemasResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
+// 	{ id: 5, name: 'UpdateSchemaRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
+// 	{ id: 6, name: 'UpdateSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
+// 	{ id: 7, name: 'CreateSchemaRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
+// 	{ id: 8, name: 'CreateSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
+// 	{ id: 9, name: 'GetSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
+// 	{ id: 10, name: 'GetSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' }
+// ];
+
+export async function loader() {
+	return getSchemas();
+}
 
 let Schemas = function({ user, update }) {
-	let [ rows, setRows ] = useState([]);
-	useEffect(() => {
-		//TODO: Load Schemas over here
-		setRows(_rows);
-	}, []);
+	let rows = useLoaderData();
+
 	return (
 		<div>
 			<Header displayUserMenu={true} user={user} />
@@ -59,7 +62,7 @@ let Schemas = function({ user, update }) {
 								<tbody>
 									{rows.map((row) => (
 										<tr
-											key={row.id}
+											key={row.sc_id}
 											className={`h-10 p-1 ${row.id % 2 === 0 ? 'bg-zinc-200' : ''}`}
 										>
 											<td className="p-2">{row.name}</td>
@@ -67,10 +70,10 @@ let Schemas = function({ user, update }) {
 											<td className="p-2">{row.createdOn}</td>
 											<td className="p-2 text-center">{row.active}</td>
 											<td className="p-2 flex justify-end">
-												<Link to={`/schemas/${row.id}`} className="mx-1">
+												<Link to={`/schemas/${row.sc_id}`} className="mx-1">
 													<IconView className="h-[20px]" />
 												</Link>{' '}
-												<Link to={`/schemas/${row.id}/edit`} className="mx-1">
+												<Link to={`/schemas/${row.sc_id}/edit`} className="mx-1">
 													<IconEdit className="h-[20px]" />
 												</Link>
 											</td>

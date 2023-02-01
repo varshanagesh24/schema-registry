@@ -1,0 +1,35 @@
+service: sapi
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  environment:
+    host: sql12.freemysqlhosting.net
+    user: sql12594190
+    password: 2GSEneGDiQ
+    database: sql12594190 
+    apikey: W!QWAET%$R##
+
+functions:
+  login:
+    handler: login.handler
+    events:
+      - httpApi:
+          path: /api/login
+          method: post
+  schema:
+    handler: schema.handler
+    events:
+      - httpApi:
+          path: /api/schema
+          method: get
+      - httpApi:
+          path: /api/schema
+          method: post
+      - httpApi:
+          path: /api/schema/{id}
+          method: get
+      - httpApi:
+          path: /api/schema/{id}
+          method: post

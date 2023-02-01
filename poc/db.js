@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 var connection = mysql.createPool({
 	connectionLimit: 10,
-	host: 'sql12.freemysqlhosting.net',
-	user: 'sql12592456',
-	password: 'YMJR8k3bHC',
-	database: 'sql12592456'
+	host: 'registry.cluster-custom-chjphxdplbro.us-east-1.rds.amazonaws.com',
+	user: 'admin',
+	password: 'YoscgrT9VqW7jppjWaI',
+	database: 'registry'
 });
 
 // connection.connect(function(err) {
@@ -16,9 +16,9 @@ var connection = mysql.createPool({
 //   console.log('connected as id ' + connection.threadId);
 // });
 
-connection.query('SELECT * FROM User', function(error, results, fields) {
+connection.query('SELECT * FROM INFORMATION_SCHEMA.TABLES', function(error, results, fields) {
 	if (error) throw error;
-	console.log(results[0].userid, results.length, [ ...results ]);
+	console.log(results);
 });
 
 connection.getConnection((err, con) => {
@@ -34,9 +34,4 @@ connection.getConnection((err, con) => {
 			}.bind(this)
 		);
 	};
-
-	con.query('SELECT * FROM User WHERE userid = :userid', { userid: 'varsha' }, function(error, results, fields) {
-		if (error) throw error;
-		console.log('With Parameterised Query', results[0].userid, results.length, [ ...results ]);
-	});
 });

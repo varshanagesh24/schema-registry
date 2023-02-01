@@ -10,8 +10,7 @@ let Login = function({ update }) {
 	let [ user, setUser ] = useState(null);
 
 	let onLogin = async (data) => {
-		let response = await login(data);
-		let currentUser = await response.json();
+		let currentUser = await login(data);
 		update(currentUser);
 		setUser(currentUser);
 	};
