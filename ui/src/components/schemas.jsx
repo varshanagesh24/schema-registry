@@ -6,26 +6,18 @@ import IconEdit from './icon-edit';
 import IconView from './icon-view';
 
 import { getSchemas } from '../api';
-
-// let _rows = [
-// 	{ id: 1, name: 'LoginRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-// 	{ id: 2, name: 'LoginResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-// 	{ id: 3, name: 'GetSchemasRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-// 	{ id: 4, name: 'GetSchemasResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-// 	{ id: 5, name: 'UpdateSchemaRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-// 	{ id: 6, name: 'UpdateSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-// 	{ id: 7, name: 'CreateSchemaRequestSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-// 	{ id: 8, name: 'CreateSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-// 	{ id: 9, name: 'GetSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' },
-// 	{ id: 10, name: 'GetSchemaResponseSchema', version: '1.0', active: 'Y', createdOn: '12/12/2021' }
-// ];
+import { useDispatch, useSelector } from 'react-redux';
+import { setSchemas } from '../registrySlice';
 
 export async function loader() {
 	return getSchemas();
 }
 
 let Schemas = function({ user, update }) {
-	let rows = useLoaderData();
+	//let rows = useLoaderData();
+	let dispatch = useDispatch();
+	dispatch(setSchemas(useLoaderData()));
+	const rows = useSelector((state) => state.registry.schemas);
 
 	return (
 		<div>

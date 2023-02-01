@@ -8,6 +8,9 @@ import ErrorBoundary from './error-boundary';
 import { Suspense } from 'react';
 import { Loader } from './components/loader';
 
+import { Provider } from 'react-redux';
+import store from './store';
+
 const Login = React.lazy(() => import('./components/login'));
 const NewSchemas = React.lazy(() => import('./components/new-schemas'));
 const Schemas = React.lazy(() => import('./components/schemas'));
@@ -54,7 +57,9 @@ function App() {
 		<React.StrictMode>
 			<ErrorBoundary>
 				<Suspense fallback=<Loader />>
-					<RouterProvider router={router} />
+					<Provider store={store}>
+						<RouterProvider router={router} />
+					</Provider>
 				</Suspense>
 			</ErrorBoundary>
 		</React.StrictMode>

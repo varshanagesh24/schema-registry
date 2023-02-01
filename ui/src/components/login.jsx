@@ -1,18 +1,19 @@
-import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { login } from '../api';
+import { setUser } from '../registrySlice';
 
 import Header from './Header';
 
 let Login = function({ update }) {
 	const { register, handleSubmit, formState: { errors } } = useForm();
-	let [ user, setUser ] = useState(null);
+	const user = useSelector((state) => state.registry.user);
+	const dispatch = useDispatch();
 
 	let onLogin = async (data) => {
 		let currentUser = await login(data);
-		update(currentUser);
-		setUser(currentUser);
+		dispatch(setUser(currentUser));
 	};
 
 	return (

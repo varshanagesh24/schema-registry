@@ -3,11 +3,17 @@ import { Navigate, useLoaderData } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Header from './Header';
 import { updateSchema } from '../api';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCurrentSchema } from '../registrySlice';
 
 let EditSchemas = function(user) {
 	let [ isSaved, setisSaved ] = useState(false);
 	let [ isCancelled, setisCancelled ] = useState(false);
-	let schema = useLoaderData();
+	//let schema = useLoaderData();
+	let dispatch = useDispatch();
+	dispatch(setCurrentSchema(useLoaderData()));
+	let schema = useSelector((state) => state.registry.currentSchema);
+
 	const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: schema });
 
 	let onSubmit = (e) => {

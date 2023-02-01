@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Navigate, useLoaderData } from 'react-router-dom';
 import Header from './Header';
 import { getSchemaById } from '../api';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentSchema } from '../registrySlice';
 export async function loader({ params }) {
 	return getSchemaById(params.id);
 }
@@ -10,7 +11,11 @@ export async function loader({ params }) {
 let ViewSchemas = function({ user }) {
 	let [ isCancelled, setisCancelled ] = useState(false);
 
-	const schema = useLoaderData();
+	//const schema = useLoaderData();
+	let dispatch = useDispatch();
+	dispatch(setCurrentSchema(useLoaderData()));
+	const schema = useSelector((state) => state.registry.currentSchema);
+
 	let onCancelBtnClick = (e) => {
 		setisCancelled(true);
 	};
